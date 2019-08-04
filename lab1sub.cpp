@@ -34,8 +34,7 @@ int main()
        s2.insert(0,"0",1);
     }   
     
-    char result[s1.length()];
-    //result[s1.length()]='\0';
+    string result="";
     for(int i=s1.length()-1; i>=0  ;i--)
     { 
          
@@ -46,11 +45,11 @@ int main()
             p=-1;
             t+=10;
         }
-        result[s1.length()-i-1]=(char) (t + (int)a ) ;
+       result.push_back((char) (t + (int)a )) ;
      }
      
-     for(int i=1;i<=s1.length();i++)
-        cout<<result[s1.length()-i];
+     reverse(result.begin(), result.end());
+      cout<<result;
      cout<<endl;   
      
      return 0;
