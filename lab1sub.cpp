@@ -19,6 +19,7 @@ int main()
     {
        for(int i=0;i<s1.length();i++)
        {
+          if(s1[i]>s2[i]) break;
           if(s1[i]<s2[i])
           {
           string temp=s1;
@@ -49,6 +50,8 @@ int main()
      }
      
      reverse(result.begin(), result.end());
+     result.erase(0, result.find_first_not_of('0'));
+     if(result=="") result="0";
       cout<<result;
      cout<<endl;   
      
