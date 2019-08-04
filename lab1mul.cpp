@@ -44,6 +44,7 @@ string mul1(string s, char a)
         result.push_back((char) (t + (int)('0'))) ;
         
      }
+     if(p!=0)(result.push_back((char) (p + (int)('0'))) ) ;
      reverse(result.begin(), result.end());
      
      return result;
@@ -51,6 +52,10 @@ string mul1(string s, char a)
     
 int main()
 {
+  int t;
+  cin>>t;
+  for(int i=0;i<t;i++)
+  {
     string s1;
     cin>>s1;
     string s2;
@@ -63,6 +68,7 @@ int main()
          res= add(res,mul);
     }
     cout<<res<<endl;
+  }
 }
     
     

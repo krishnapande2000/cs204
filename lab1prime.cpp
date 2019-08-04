@@ -126,17 +126,34 @@ string add(string s1,string s2)
 
 int main()
 {
+  int t;
+  cin>>t;
+  for(int k=0;k<t;k++)
+  {
+    int flag=0;
    string s;
    cin>>s;
    string c="2";
+   if(c==s) {cout<<"Prime"<<endl; continue;}
+   if(rem(s,c)=="0"){ cout<<"Not a Prime"<<endl; continue;}
+   c=add(c,"1");
+   if(rem(s,c)=="0"){ cout<<"Not a Prime"<<endl; continue;}
+   c=add(c,"2");
+   int i=1;
    while(c.length()<= (s.length()/2 +1) )
    {
-       if(c==s) {cout<<"Prime"; return 0;}
-       if(rem(s,c)=="0"){ cout<<c<<" not prime"<<endl; return 0;}
-       c=add(c,"1");
-       cout<<c<<endl;
-   }    
-   cout<<"prime"<<endl;  
+       if(c==s) {cout<<"Prime"<<endl; flag=1; break;}
+       if(rem(s,c)=="0"){ cout<<"Not a Prime"<<endl;  flag=1; break; }
+       if(i%2)
+          c=add(c,"2");
+       else c=add(c,"4");
+       i++;
+      
+   }
+   if(flag==0)    
+   cout<<"Prime"<<endl;
+  }
+ return 0;  
 }     
    
 

@@ -2,6 +2,10 @@
 using namespace std;
 int main()
 {
+  int t;
+  cin>>t;
+  for(int i=0;i<t;i++)
+  {
     string s1;
     cin>>s1;
     string s2;
@@ -54,6 +58,6 @@ int main()
      if(result=="") result="0";
       cout<<result;
      cout<<endl;   
-     
+  }   
      return 0;
 }   

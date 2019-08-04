@@ -68,6 +68,10 @@ int com(string s1,string s2)
        
 int main()
 {
+  int t;
+  cin>>t;
+  for(int i=0;i<t;i++)
+  {
     string s1;
     cin>>s1;
     string s2;
@@ -75,8 +79,8 @@ int main()
     string res="";
     int n1=s1.length();
     int n2=s2.length();
-    if(com(s1,s2)==0){ cout<<0<<" "<<s1<<endl; return 0;}
-    if(com(s1,s2)==2) {cout<<1<<" "<<0<<endl; return 0;}
+    if(com(s1,s2)==0){ cout<<0<<" "<<s1<<endl; continue;}
+    if(com(s1,s2)==2) {cout<<1<<" "<<0<<endl; continue;}
     string x="";
     int j=n2-1,k=0;
     for(int i=0;i<n2;i++) x.push_back(s1[i]);
@@ -97,8 +101,10 @@ int main()
         res.push_back(k+'0');    
     }
     res.erase(0, res.find_first_not_of('0'));
-    cout<<res<<" "<<x<<endl;
-    return 0;
+    cout<<res<<"\n"<<x<<endl;
+
+  }
+  return 0;
 }    
              
             

@@ -2,6 +2,10 @@
 using namespace std;
 int main()
 {
+  int t;
+  cin>>t;
+  for(int i=0;i<t;i++)
+  {
     string s1;
     cin>>s1;
     string s2;
@@ -32,7 +36,8 @@ int main()
       
       reverse(result.begin(), result.end());
       cout<<result;
-     cout<<endl;   
+     cout<<endl; 
+   }  
      
      return 0;
 }   
