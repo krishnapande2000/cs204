@@ -19,23 +19,19 @@ int main()
        s2.insert(0,"0",1);
     }   
     
-    char result[s1.length()+1];
-    result[s1.length()]='\0';
+    string result="";                                            
     for(int i=s1.length()-1; i>=0  ;i--)
     { 
          
         t= (int)(s1[i]-'0') + (int)(s2[i] -'0') + p;
-        p=0;
-        if(t>=10)
-        {
-            p=1;
-            t-=10;
-        }
-        result[s1.length()-i-1]=(char) (t + (int)a ) ;
+        p=t/10;
+        t=t%10;
+        result.push_back((char) (t + (int)a )) ;
      }
-     if(p==1) result[s1.length()]='1';
-     for(int i=0;i<=s1.length();i++)
-        cout<<result[s1.length()-i];
+     if(p==1) result.push_back('1');
+      
+      reverse(result.begin(), result.end());
+      cout<<result;
      cout<<endl;   
      
      return 0;
