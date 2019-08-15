@@ -29,7 +29,7 @@ struct point *createnode()
  	 struct point*temp=head;
  	 head=temp->next;
  	 free(temp);
-         cout<<0<<endl;
+         
         }
         else cout<<-1<<endl;
         
@@ -50,24 +50,24 @@ struct point *createnode()
                    prev->next=temp->next;
                    free(temp);
                    flag=1;
-                   cout<<0<<endl; break;   
+                    break;   
  		}
  	}
    if(flag==0) cout<<-1<<endl;
    
  }
-int Search(int x,int y)
+void Search(int x,int y)
  {
  	struct point *temp=head; int c=0;
  	while(temp!=NULL)
  	{
  		if(temp->x==x && temp->y==y) 
  		{
-                   c++;
+             cout<<"True"<<endl; return;
  		}
             temp=temp->next;
  	}
- 	return c;
+ 	cout<<"False"<<endl;
  }
  int Length()
  {
@@ -86,11 +86,12 @@ int Search(int x,int y)
  	while(temp!=NULL)
  	{
  	   float dist= sqrt((temp->x)*(temp->x) + (temp->y)*(temp->y) ); 
- 	   if(dist <= d) {flag=1; cout<<"("<<temp->x<<","<<temp->y<<")"<<" ";}
+ 	   if(dist <= d) {flag++;}
     	   temp=temp->next;	
  	}
-         if(flag==0) cout<<-1;
- 	cout<<endl;
+         if(flag==0) cout<<-1<<endl;
+         else cout<<flag<<endl;
+ 	
  }
 /* void print()
  {
@@ -137,7 +138,7 @@ int Search(int x,int y)
  		case 5:
  		  int x2,y1;
  		 cin>>x2>>y1;
- 		 cout<<Search(x2,y1)<<endl;      
+ 		 Search(x2,y1);      
                  break;
                 case 6:
                  cout<<Length()<<endl;
