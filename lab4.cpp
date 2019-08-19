@@ -170,7 +170,15 @@ int eval(et * root){
 
 int main()
 {
-    string s;
+	int t;
+	cin>>t;
+	for(int j=0;j<t;j++)
+	{
+		int lines;
+		cin>>lines;
+	  for(int k=0;k<lines;k++)
+	    {
+         string s;
 	cin>>s;
 	vector<string> str;
 	string temp="";
@@ -207,7 +215,8 @@ int main()
     struct et* root=constructTree(postexp);
     int ans = eval(root);
     cout<<ans<<endl;
-
+	}
+	}
 
 
 
