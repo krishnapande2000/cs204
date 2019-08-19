@@ -20,62 +20,17 @@ int prec(string c)
     return -1; 
 } 
 
-vector<string> infixToPostfix(vector<string> s) 
+string removeSpaces(string str) 
 { 
-    std::stack<string> st; 
-    st.push("N"); 
-    int l = s.size(); 
-    vector<string> ns; 
-    for(int i = 0; i < l; i++) 
+    int i = 0, j = 0; 
+    while (str[i]) 
     { 
-        // If the scanned character is an operand, add it to output string. 
-        if(s[i]!="(" && s[i]!=")" && s[i]!="+" && s[i]!="*" && s[i]!="-" && s[i]!="/") 
-        ns.push_back(s[i]); 
-  
-        // If the scanned character is an ‘(‘, push it to the stack. 
-        else if(s[i] == "(") 
-          
-        st.push("("); 
-          
-        // If the scanned character is an ‘)’, pop and to output string from the stack 
-        // until an ‘(‘ is encountered. 
-        else if(s[i] == ")") 
-        { 
-            while(st.top() != "N" && st.top() != "(") 
-            { 
-                string c = st.top(); 
-                st.pop(); 
-                ns.push_back(c); 
-            } 
-            if(st.top() == "(") 
-            { 
-                string c = st.top(); 
-                st.pop();  
-            } 
-        } 
-          
-        //If an operator is scanned 
-        else{ 
-            while(st.top() != "N" && prec(s[i]) <= prec(st.top())) 
-            { 
-                string c = st.top(); 
-                st.pop(); 
-                ns.push_back(c); 
-            } 
-            st.push(s[i]); 
-        } 
-  
+        if (str[i] != ' ') 
+           str[j++] = str[i]; 
+        i++; 
     } 
-    //Pop all the remaining elements from the stack 
-    while(st.top() != "N") 
-    { 
-                string c = st.top(); 
-                st.pop(); 
-                ns.push_back(c); 
-    } 
-      
-    return ns;
-  
+    str[j] = '\0'; 
+    return str; 
 } 
 bool isOperator(string c) 
 { 
@@ -94,6 +49,68 @@ et* newNode(string v)
     return temp; 
 }; 
   
+
+vector<string> infixToPostfix(vector<string> s) 
+{ 
+    std::stack<string> st; 
+    st.push("N"); 
+    int l = s.size(); 
+    vector<string> ns; 
+    for(int i = 0; i < l; i++) 
+    { 
+        // If the scanned character is an operand, add it to output string. 
+        if(s[i]!="(" && s[i]!=")" && s[i]!="+" && s[i]!="*" && s[i]!="-" && s[i]!="/" && s[i]!="") 
+         ns.push_back(s[i]); 
+
+  
+        // If the scanned character is an ‘(‘, push it to the stack. 
+        else if(s[i] == "(")   
+        st.push("("); 
+          
+        // If the scanned character is an ‘)’, pop and to output string from the stack 
+        // until an ‘(‘ is encountered. 
+        else if(s[i] == ")") 
+        { 
+            while(st.top() != "N" && st.top() != "(") 
+            { 
+                string c = st.top(); 
+                st.pop(); 
+
+              if(c!="")ns.push_back(c);
+               
+            } 
+            if(st.top() == "(") 
+            { 
+                string c = st.top(); 
+                st.pop();  
+            } 
+        } 
+          
+        //If an operator is scanned 
+        else{ 
+            while(st.top() != "N" && prec(s[i]) <= prec(st.top())) 
+            { 
+                string c = st.top(); 
+                st.pop(); 
+                if(c!="")ns.push_back(c); 
+                
+            } 
+            st.push(s[i]); 
+        } 
+  
+    } 
+    //Pop all the remaining elements from the stack 
+    while(st.top() != "N") 
+    { 
+                string c = st.top(); 
+                st.pop(); 
+              if(c!="") ns.push_back(c); 
+    } 
+      
+    return ns;
+  
+} 
+
 // Returns root of constructed tree for given 
 // postfix expression 
 et* constructTree(vector<string> postfix) 
@@ -137,6 +154,19 @@ et* constructTree(vector<string> postfix)
   
     return t; 
 } 
+int eval(et * root){
+    if(root==NULL) return 0;
+    if(root->left==NULL&&root->right==NULL){
+        return stoi(root->value);
+    }
+    int l=eval(root->left);
+    int r=eval(root->right);
+    if(root->value=="+") return l+r;
+    else if(root->value=="-") return l-r;
+    else if(root->value=="*") return l*r;
+    else if(root->value=="/") return l/r;
+    else return pow(l,r);
+}
 
 int main()
 {
@@ -161,10 +191,25 @@ int main()
 		}
 
 	}
+    
     str.push_back(temp);
+    
+     vector<string> postexp=infixToPostfix(str);
+   /* for(int i=0; i<str.size();i++)
+    cout<<str[i];
+    cout<<endl;
+
     vector<string> postexp=infixToPostfix(str);
     for(int i=0; i<postexp.size();i++)
     cout<<postexp[i]<<" ";
+    cout<<endl;*/
+
+    struct et* root=constructTree(postexp);
+    int ans = eval(root);
+    cout<<ans<<endl;
+
+
+
 
 	
 }
