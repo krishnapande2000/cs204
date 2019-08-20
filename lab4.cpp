@@ -34,9 +34,9 @@ string removeSpaces(string str)
 } 
 bool isOperator(string c) 
 { 
-    if (c == "+" || c == "-" || 
+    if (c.length()==1 && (c == "+" || c == "-" || 
             c == "*" || c == "/" || 
-            c == "^") 
+            c == "^") )
         return true; 
     return false; 
 } 
@@ -59,9 +59,9 @@ vector<string> infixToPostfix(vector<string> s)
     for(int i = 0; i < l; i++) 
     { 
         // If the scanned character is an operand, add it to output string. 
-        if(s[i]!="(" && s[i]!=")" && s[i]!="+" && s[i]!="*" && s[i]!="-" && s[i]!="/" && s[i]!="") 
+        if(!isOperator(s[i]) && s[i]!="" && s[i]!="(" && s[i]!=")") 
          ns.push_back(s[i]); 
-
+        
   
         // If the scanned character is an ‘(‘, push it to the stack. 
         else if(s[i] == "(")   
@@ -76,7 +76,7 @@ vector<string> infixToPostfix(vector<string> s)
                 string c = st.top(); 
                 st.pop(); 
 
-              if(c!="")ns.push_back(c);
+              if(c!="" && c!="(" && c!=")")ns.push_back(c);
                
             } 
             if(st.top() == "(") 
@@ -90,9 +90,10 @@ vector<string> infixToPostfix(vector<string> s)
         else{ 
             while(st.top() != "N" && prec(s[i]) <= prec(st.top())) 
             { 
+                if(s[i]=="^"&&st.top()=="^") break;
                 string c = st.top(); 
                 st.pop(); 
-                if(c!="")ns.push_back(c); 
+                if(c!="" && c!="(" && c!=")")ns.push_back(c); 
                 
             } 
             st.push(s[i]); 
@@ -104,7 +105,7 @@ vector<string> infixToPostfix(vector<string> s)
     { 
                 string c = st.top(); 
                 st.pop(); 
-              if(c!="") ns.push_back(c); 
+              if(c!="" && c!="(" && c!=")") ns.push_back(c); 
     } 
       
     return ns;
@@ -170,63 +171,56 @@ int eval(et * root){
 
 int main()
 {
-	int t;
-	cin>>t;
-	for(int j=0;j<t;j++)
-	{
-		int lines;
-		cin>>lines;
-	  for(int k=0;k<lines;k++)
-	    {
+    int t;
+    cin>>t;
+    for(int j=0;j<t;j++)
+    {
+        int lines;
+        cin>>lines;
+      for(int k=0;k<lines;k++)
+        {
          string s;
-	cin>>s;
-	vector<string> str;
-	string temp="";
+    cin>>s;
+    vector<string> str;
+    string temp="";
     
-	for(int i=0; i<s.length();i++)
-	{
+    for(int i=0; i<s.length();i++)
+    {
         //string temp="";
-		if(s[i]>=48 && s[i]<=57)
-		{
+        if(s[i]>=48 && s[i]<=57)
+        {
           temp+=s[i];
-		}
-		else
-		{
-             str.push_back(temp);//to push the number formed 
+        }
+        else
+        {
+            if(temp=="" && s[i]=='-')
+                {temp+=s[i]; continue;}
+             if(temp!="")str.push_back(temp);//to push the number formed 
             temp=""; temp+=s[i];  //tp push the operator make it a string first 
-              str.push_back(temp);//then push
+              if(temp!="")str.push_back(temp);//then push
             temp="";
-		}
+        }
 
-	}
+    }
     
     str.push_back(temp);
     
      vector<string> postexp=infixToPostfix(str);
-   /* for(int i=0; i<str.size();i++)
-    cout<<str[i];
+   for(int i=0; i<str.size();i++)
+    cout<<str[i]<<" @ ";
     cout<<endl;
-
-    vector<string> postexp=infixToPostfix(str);
+    //vector<string> postexp=infixToPostfix(str);
     for(int i=0; i<postexp.size();i++)
     cout<<postexp[i]<<" ";
-    cout<<endl;*/
+    cout<<endl;
 
     struct et* root=constructTree(postexp);
     int ans = eval(root);
     cout<<ans<<endl;
-	}
-	}
+    }
+    }
 
 
 
-	
+    
 }
-
-
-
-
-
-
-
-
