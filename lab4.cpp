@@ -86,7 +86,7 @@ vector<string> infixToPostfix(vector<string> s)
             } 
         } 
           
-        //If an operator is scanned 
+        //if an operator is scanned 
         else{ 
             while(st.top() != "N" && prec(s[i]) <= prec(st.top())) 
             { 
@@ -100,7 +100,7 @@ vector<string> infixToPostfix(vector<string> s)
         } 
   
     } 
-    //Pop all the remaining elements from the stack 
+    //pop all the remaining elements from the stack 
     while(st.top() != "N") 
     { 
                 string c = st.top(); 
@@ -112,7 +112,7 @@ vector<string> infixToPostfix(vector<string> s)
   
 } 
 
-// Returns root of constructed tree for given 
+// returns root of constructed tree for given 
 // postfix expression 
 et* constructTree(vector<string> postfix) 
 { 
@@ -193,7 +193,7 @@ int main()
         }
         else
         {
-            if(temp=="" && s[i]=='-')
+            if(temp=="" && s[i]=='-') //for unary operator
                 {temp+=s[i]; continue;}
              if(temp!="")str.push_back(temp);//to push the number formed 
             temp=""; temp+=s[i];  //tp push the operator make it a string first 
@@ -206,13 +206,13 @@ int main()
     str.push_back(temp);
     
      vector<string> postexp=infixToPostfix(str);
-   for(int i=0; i<str.size();i++)
+   /*for(int i=0; i<str.size();i++)
     cout<<str[i]<<" @ ";
     cout<<endl;
     //vector<string> postexp=infixToPostfix(str);
     for(int i=0; i<postexp.size();i++)
     cout<<postexp[i]<<" ";
-    cout<<endl;
+    cout<<endl;*/
 
     struct et* root=constructTree(postexp);
     int ans = eval(root);
