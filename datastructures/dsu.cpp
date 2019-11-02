@@ -44,7 +44,7 @@ int dsu(int a, int b,int ds[],int rank[])
 	int repb=findset(b,ds,rank);
 	if(rank[repa]==rank[repb])
 	{
-		rank[repbb]++;
+		rank[repb]++;
 		ds[repa]=repb; //link
 	}
 	if(rank[repa]>rank[repb])
