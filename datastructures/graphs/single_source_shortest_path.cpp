@@ -114,14 +114,14 @@ Input:
 6 7 3
 1
 Output:
-Min distance from 1 to 0 is: 2147483647
-Min distance from 1 to 1 is: 0
-Min distance from 1 to 2 is: 1
-Min distance from 1 to 3 is: 3
-Min distance from 1 to 4 is: 5
-Min distance from 1 to 5 is: 0
-Min distance from 1 to 6 is: 4
-Min distance from 1 to 7 is: 3
+ 0 2147483647
+ 1 0
+ 2 1
+ 3 3
+ 4 5
+ 5 0
+ 6 4
+ 7 3
 
 
 */
